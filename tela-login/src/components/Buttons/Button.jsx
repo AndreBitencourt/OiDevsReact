@@ -1,7 +1,7 @@
-function Button(props){
+function Button({value, onClick}){
 return(
     <>
-    <button className="submit">{props.value} </button>
+    <button className="submit" onClick={onClick}> {value} </button>
     </>
 )
 }

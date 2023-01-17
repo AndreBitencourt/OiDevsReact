@@ -1,7 +1,7 @@
 function Link(props){
     return(
     <>
-    <a href={props.href} className="recuperar_senha">{props.content}</a>
+    <a href={props.href} target="_blank" rel="noopener" className="recuperar_senha" >{props.content}</a>
     </>
     )        
 }
