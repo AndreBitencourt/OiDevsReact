@@ -1,12 +1,16 @@
 import '../App.css';
 import Title from '../components/Titles/Title'
 import Input from '../components/Inputs/Input'
-import Button from '../components/Buttons/Button'
+import Button from '../../../tela-login-aula5/src/components/Buttons/Button'
 import Link from '../components/Links/Link'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import React from 'react';
+import { useState } from 'react';
+
 
 function Login() {
     const navigate = useNavigate()
+    const [title, setTitle] = useState("Mudar")
     return (
         <>
             <div className="login">
@@ -15,7 +19,7 @@ function Login() {
 
                     <div class="card-header">
 
-                        <Title titulo="Login"></Title>
+                        <Title titulo={123}></Title>
 
                     </div>
 
@@ -23,7 +27,7 @@ function Login() {
 
                         <Input label="usuario" conteudo="Usuário" type="text" />
 
-                        <Input label="senha" conteudo="Senha" type="password" />
+                        <Input label="senha" hideContent conteudo="Senha" type="password" />
 
                     </div>
 

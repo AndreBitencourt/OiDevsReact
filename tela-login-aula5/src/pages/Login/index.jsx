@@ -1,11 +1,10 @@
+import '../../App.css';
 import { useNavigate } from "react-router-dom";
-import '../../Style.css';
 import Title from '../../components/Titles/Title'
 import Input from '../../components/Inputs/Input'
 import Button from '../../components/Buttons/Button'
 import Link from '../../components/Links/Link'
 
-// function Login() {s
 
 const Login = () => {
 
