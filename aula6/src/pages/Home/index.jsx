@@ -14,22 +14,31 @@ const Home = () => {
     const [contador, setContador] = useState(0)
 
     const { users } = location.state;
+    
+    const [listOfUsers, setListOfUsers] = useState([]);
+    const [count, setCount] = useState(0);
+    const [showMsg, setShowMsg] = useState(false)
 
-    console.log(users)
+    //console.log(users)
 
-    useEffect(() => {
-        //Executa um bloco JS após a rederização do componente
-        fetch('https://jsonplaceholder.typicode.com/photos')
-            .then((response) => response.json())
-            //.then((data) => console.log(data))
-            //.then((data) => setLoading(false))
-            .then((data) => {
-                setPhotos(data);
-                setTimeout(() => setLoading(false), 2000)
-                //setLoading(false)
-            })
-    }, [contador]);
-    //Observação para a variável contador, quando ela alterar atualiza o componente
+    const renderUser = () => {
+        const arr = JSON.parse(localStorage.getItem("users"));
+        if(!users[count]) {
+          setShowMsg(true)
+          return
+        }
+        setCount(prevState => prevState + 1)
+        arr.push(users[count])
+        setListOfUsers(arr)
+      }
+
+      useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(listOfUsers))
+    
+        return () => {
+          localStorage.removeItem("users")
+        }
+      }, [listOfUsers])
 
     return (
         <div id="login">
@@ -52,18 +61,35 @@ const Home = () => {
                             )*/}
 
 
-                <ul>
+                {/* <ul>
                     {users.map((user) => (
                         <li key={user.id}>{user.username}</li>
                     ))}
-                </ul>
+                </ul> */}
 
-                <div className="card-footer">
+                <ul>
+          {
+            listOfUsers.length === 0 ? <p className="msg">Clique abaixo para exibir os usuários </p> : listOfUsers.map((user) => (
+              <li key={user.id}>
+                {user.username}
+              </li>
+            ))
+          }
+        </ul>
+        <div>
+        <Button value={`Contador: ${count}`} onClick={renderUser}/>
+        {
+          showMsg &&
+        <p className="finish-msg">Esses são todos os usuários cadastrados!</p>
+        }
+        </div>
+
+                {/* <div className="card-footer">
                     <Button value="Sair" onClick={() => navigate("/")} />
                     <h1>Contador: {contador}</h1>
                     <button onClick={() => setContador(contador + 1)}>+</button>
                     <button onClick={() => setContador(contador - 1)}>-</button>
-                </div>
+                </div> */}
 
             </div>
         </div>
